@@ -1,0 +1,32 @@
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Large raw datasets (downloaded automatically via download_dataset.py)
+data/raw/*.csv
+data/cleaned_tickets.csv
+data/train.csv
+data/test.csv
+
+# Large model binaries (>100MB safetensors/joblib files)
+models/bert/final/*.safetensors
+models/bert/checkpoints/
+models/distilbert/final/*.safetensors
+models/distilbert/checkpoints/
+models/hybrid/sbert/*.safetensors
+models/sbert_xgboost/embedding_model/*.safetensors
+models/hybrid/*.npy
+models/hybrid/*.csv
+
+# Temporary test screenshots
+screenshot*.png
+verify*.png
+test*.png
+web_shot.png

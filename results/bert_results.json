@@ -1,0 +1,17 @@
+{
+    "accuracy": 0.5108492330714552,
+    "precision": 0.5384361825780112,
+    "recall": 0.5108492330714552,
+    "f1": 0.47170412860612515,
+    "weighted_f1": 0.47170412860612515,
+    "macro_f1": 0.6838472904193448,
+    "top_3_accuracy": 0.7990086045641601,
+    "roc_auc_ovr_weighted": 0.8552003059144796,
+    "model": "bert",
+    "base_model": "bert-base-multilingual-cased",
+    "epochs": 1,
+    "max_length": 256,
+    "training_time_seconds": 2439.942,
+    "prediction_time_seconds": 50.6714,
+    "embedding_time_seconds": null
+}

@@ -1,0 +1,25 @@
+DATASET ATTRIBUTION AND LOCATION
+
+Dataset: Customer Support Tickets / Multilingual Customer Support Tickets
+Author/source: Tobi-Bueck / Tobias Bueck
+Hugging Face: https://huggingface.co/datasets/Tobi-Bueck/customer-support-tickets
+Kaggle: https://www.kaggle.com/datasets/tobiasbueck/multilingual-customer-support-tickets
+
+The source page currently labels the Hugging Face mirror CC BY-NC 4.0.
+For a university project, include attribution and explain that this dataset is synthetically
+generated. Review the current dataset license before any commercial reuse.
+
+After running `python prepare_data.py`, save/inspect files at these exact project-relative paths:
+
+data/raw/customer_support_tickets.csv
+data/raw/source_info.json
+data/cleaned_tickets.csv
+data/train.csv
+data/test.csv
+
+The downloader saves a raw CSV automatically. If the automatic download fails, download the
+main multilingual CSV from the Hugging Face file list and save it as:
+data/raw/customer_support_tickets.csv
+
+Then run:
+python prepare_data.py

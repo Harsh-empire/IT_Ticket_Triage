@@ -1,0 +1,23 @@
+{
+    "source": "Hugging Face: Tobi-Bueck/customer-support-tickets",
+    "source_file": "train split loaded by datasets",
+    "rows_downloaded": 61765,
+    "local_file": "C:\\Users\\jyoth\\Downloads\\IT_Ticket_Triage_Complete_Project\\IT_Ticket_Triage_Complete_Project\\data\\raw\\customer_support_tickets.csv",
+    "required_fields": [
+        "subject",
+        "body",
+        "queue"
+    ],
+    "random_state": 42,
+    "test_size": 0.2,
+    "source_rows_loaded": 61765,
+    "rows_after_deduplication_and_filtering": 53456,
+    "train_rows": 42764,
+    "test_rows": 10692,
+    "queue_classes": 52,
+    "duplicate_texts_removed": 8309,
+    "rows_removed_for_rare_queues": 0,
+    "minimum_tickets_per_queue": 5,
+    "target": "queue",
+    "input_text": "subject + body"
+}

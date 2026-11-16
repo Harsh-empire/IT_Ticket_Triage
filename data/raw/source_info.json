@@ -1,0 +1,11 @@
+{
+    "source": "Hugging Face: Tobi-Bueck/customer-support-tickets",
+    "source_file": "train split loaded by datasets",
+    "rows_downloaded": 61765,
+    "local_file": "C:\\Users\\jyoth\\Downloads\\IT_Ticket_Triage_Complete_Project\\IT_Ticket_Triage_Complete_Project\\data\\raw\\customer_support_tickets.csv",
+    "required_fields": [
+        "subject",
+        "body",
+        "queue"
+    ]
+}

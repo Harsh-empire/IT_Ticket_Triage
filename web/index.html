@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligent IT Support Ticket Triage — AI Routing Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css?v=8">
+</head>
+<body>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <div class="brand-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">TriageAI</div>
+        <div class="brand-subtitle">Intelligent IT Support Ticket Routing</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#triage-demo" class="nav-link active">Live Triage Demo</a>
+      <a href="#benchmarks" class="nav-link">Model Benchmarks</a>
+      <a href="#visualizations" class="nav-link">Visual Analytics</a>
+      <a href="#architecture" class="nav-link">Architecture</a>
+    </nav>
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      <span id="system-status-text">GPU Accelerated (RTX 3050)</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Header -->
+    <section class="hero-section">
+      <div class="hero-tag">Automated IT Service Management</div>
+      <h1 class="hero-title">Multilingual Support Ticket Triage & Semantic Routing</h1>
+      <p class="hero-desc">
+        A comparative evaluation of Classical Machine Learning, Semantic Embeddings, Fine-Tuned Multilingual Transformers, and Hybrid Retrieval-Augmented Fusion across 53,456 enterprise tickets and 52 support queues.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Processed Dataset</div>
+          <div class="stat-value" id="stat-tickets">53,456</div>
+          <div class="stat-desc">Deduplicated bilingual tickets (EN/DE)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Support Queues</div>
+          <div class="stat-value" id="stat-queues">52</div>
+          <div class="stat-desc">Specialized IT routing destinations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Evaluated Models</div>
+          <div class="stat-value" id="stat-models">6</div>
+          <div class="stat-desc">Classical, SBERT, Transformers, Hybrid</div>
+        </div>
+        <div class="stat-card stat-highlight">
+          <div class="stat-label">Top-3 Routing Accuracy</div>
+          <div class="stat-value" id="stat-top3">93.6%</div>
+          <div class="stat-desc">Ensures agent routing reliability</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Triage Demo -->
+    <section id="triage-demo" class="card demo-card">
+      <div class="card-header">
+        <div class="card-badge">Interactive Demo</div>
+        <h2>Live Ticket Triage & Queue Prediction</h2>
+        <p>Test real-time routing predictions with automated queue classification and nearest-neighbor semantic ticket retrieval.</p>
+      </div>
+
+      <!-- Quick Preset Buttons -->
+      <div class="presets-container">
+        <span class="preset-label">Quick Sample Tickets:</span>
+        <div class="preset-buttons">
+          <button class="preset-btn active-preset" onclick="loadPreset('vpn')">VPN Connection Failure</button>
+          <button class="preset-btn" onclick="loadPreset('sap')">SAP Payroll Error</button>
+          <button class="preset-btn" onclick="loadPreset('license')">Salesforce License</button>
+          <button class="preset-btn" onclick="loadPreset('db')">Postgres Deadlock</button>
+          <button class="preset-btn" onclick="loadPreset('hardware')">Display Port Fault</button>
+        </div>
+      </div>
+
+      <div class="demo-form">
+        <div class="input-row">
+          <div class="input-group">
+            <label for="ticket-subject">Ticket Subject</label>
+            <input type="text" id="ticket-subject" value="VPN connection failure after Windows 11 update" placeholder="e.g. Cannot connect to corporate VPN after Windows 11 update" autocomplete="off">
+          </div>
+          <div class="input-group model-selector-group">
+            <div class="label-with-badge">
+              <label for="model-selector">Triage Model</label>
+              <span class="auto-badge" id="auto-mode-badge">
+                <span class="pulse-indicator"></span>
+                AI Auto-Router Active
+              </span>
+            </div>
+            <select id="model-selector">
+              <option value="auto" selected>✨ Auto-Select Best Model (AI Dynamic Dispatch — Zero Manual Selection)</option>
+              <optgroup label="── Manual Override (Benchmark Ablations) ──">
+                <option value="hybrid">Hybrid (DistilBERT + SBERT Retrieval) [93.6% Top-3]</option>
+                <option value="bert">BERT Multilingual Fine-Tuned</option>
+                <option value="distilbert">DistilBERT Multilingual Fine-Tuned</option>
+                <option value="sbert_xgboost">Sentence-BERT + XGBoost</option>
+                <option value="tfidf_logistic_regression">TF-IDF + Logistic Regression</option>
+                <option value="tfidf_xgboost">TF-IDF + XGBoost</option>
+              </optgroup>
+            </select>
+            <div class="auto-hint" id="auto-hint-text">
+              <span class="auto-hint-icon">⚡</span>
+              <span>Zero-Manual Mode: Automatically selects the top model (Hybrid 93.6% Top-3) for any live ticket.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="ticket-body">Ticket Description / Body</label>
+          <textarea id="ticket-body" rows="4" placeholder="e.g. The AnyConnect client returns Error 442: Failed to enable Virtual Adapter.">Cisco AnyConnect client returns Error 442: Failed to enable Virtual Adapter. The secure tunnel drops immediately after entering MFA credentials. Network adapter has been reset.</textarea>
+        </div>
+
+        <div class="form-actions">
+          <button id="classify-btn" class="btn btn-primary" onclick="classifyTicket()">
+            <span class="btn-spinner" id="btn-spinner" style="display: none;"></span>
+            <span class="btn-text" id="btn-text">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              Auto-Route & Predict IT Queue
+            </span>
+          </button>
+          <button class="btn btn-secondary" onclick="clearTicketForm()">Clear Inputs</button>
+        </div>
+      </div>
+
+      <!-- Live Prediction Result Container -->
+      <div id="prediction-result" class="prediction-result" style="display: block;">
+        <!-- Auto Dispatch Callout Banner -->
+        <div id="auto-dispatch-banner" class="auto-dispatch-banner" style="display: flex;">
+          <div class="auto-banner-left">
+            <div class="auto-banner-icon">🤖</div>
+            <div>
+              <div class="auto-banner-title">Zero-Manual AI Dispatch: Optimal Model Auto-Selected</div>
+              <div class="auto-banner-desc" id="auto-banner-desc">System dynamically analyzed live ticket and auto-selected Hybrid DistilBERT + SBERT Fusion (Leader: 93.6% Top-3 Accuracy). Zero manual effort.</div>
+            </div>
+          </div>
+          <div class="auto-banner-tag" id="auto-banner-tag">Optimal Model Matched</div>
+        </div>
+
+        <div class="result-header">
+          <div class="result-title">Triage Recommendation</div>
+          <div class="result-timestamp" id="res-timestamp">Live Inference</div>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-card primary-result">
+            <div class="res-label">Predicted Support Queue</div>
+            <div class="res-queue-badge" id="res-queue">Network Operations / VPN Support</div>
+            <div class="confidence-bar-wrapper">
+              <div class="confidence-header">
+                <span>Model Confidence Score</span>
+                <span id="res-score" class="res-score">91.8%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="res-progress" style="width: 91.8%;"></div>
+              </div>
+            </div>
+            <div class="model-used-tag" id="res-model-used">🤖 Auto-Selected: Hybrid DistilBERT + SBERT Semantic Retrieval Fusion (93.6% Top-3)</div>
+          </div>
+
+          <div class="result-card alternatives-card">
+            <div class="res-label">Alternative Routing Options (Top-3)</div>
+            <div class="alt-list" id="res-alternatives">
+              <div class="alt-item">
+                <span class="alt-name">IT Infrastructure & Systems</span>
+                <span class="alt-prob">6.5%</span>
+              </div>
+              <div class="alt-item">
+                <span class="alt-name">Technical Support</span>
+                <span class="alt-prob">1.7%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Semantically Similar Historical Tickets (Retrieval-Augmented Evidence) -->
+        <div class="evidence-section">
+          <div class="evidence-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Top-3 Similar Historical Knowledge Base Tickets (Semantic Evidence)</span>
+          </div>
+          <div class="evidence-cards" id="res-evidence">
+            <div class="evidence-card">
+              <div class="evidence-card-header">
+                <span class="evidence-rank">#1 Historical Match</span>
+                <span class="evidence-sim">93.4% Sim</span>
+              </div>
+              <div class="evidence-queue">Network Operations / VPN Support</div>
+              <div class="evidence-text">Historical ticket: Reported VPN connection drops following Windows 11 cumulative patch. Fixed via Virtual Adapter registry permissions.</div>
+            </div>
+            <div class="evidence-card">
+              <div class="evidence-card-header">
+                <span class="evidence-rank">#2 Historical Match</span>
+                <span class="evidence-sim">89.1% Sim</span>
+              </div>
+              <div class="evidence-queue">Network Operations / VPN Support</div>
+              <div class="evidence-text">Escalation article: AnyConnect error 442 virtual adapter initialization failure. Reinstalled Cisco DNE driver and refreshed routing tables.</div>
+            </div>
+            <div class="evidence-card">
+              <div class="evidence-card-header">
+                <span class="evidence-rank">#3 Historical Match</span>
+                <span class="evidence-sim">85.2% Sim</span>
+              </div>
+              <div class="evidence-queue">IT Infrastructure & Systems</div>
+              <div class="evidence-text">Knowledge-base resolution: Remote employee VPN gateway session termination troubleshooting and MFA profile re-enrollment checklist.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Model Comparison Benchmarks Table -->
+    <section id="benchmarks" class="card">
+      <div class="card-header">
+        <div class="card-badge">Empirical Results</div>
+        <h2>Comprehensive Model Benchmark Comparison</h2>
+        <p>All metrics measured on the held-out test split (10,692 tickets) across 52 support queues.</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table" id="comparison-table">
+          <thead>
+            <tr>
+              <th>Model Architecture</th>
+              <th>Accuracy (Test Set)</th>
+              <th style="color: #38bdf8; background: rgba(56, 189, 248, 0.08);">⚡ Live Demo Confidence</th>
+              <th>Weighted F1</th>
+              <th>Macro F1</th>
+              <th>Weighted Precision</th>
+              <th>Weighted Recall</th>
+              <th>Top-3 Accuracy</th>
+              <th>Training Time</th>
+              <th>Inference Time</th>
+            </tr>
+          </thead>
+          <tbody id="comparison-tbody">
+            <tr data-model-id="tfidf_logistic_regression">
+              <td class="model-cell">TF-IDF + Logistic Regression</td>
+              <td>52.52%</td>
+              <td class="live-score-col" data-col-model="tfidf_logistic_regression"><span class="score-pill score-pill-active">71.5%</span></td>
+              <td>0.5036</td>
+              <td>0.6616</td>
+              <td>56.88%</td>
+              <td>52.52%</td>
+              <td>81.36%</td>
+              <td>101.7s</td>
+              <td>0.035s</td>
+            </tr>
+            <tr data-model-id="tfidf_xgboost">
+              <td class="model-cell">TF-IDF + XGBoost</td>
+              <td>49.75%</td>
+              <td class="live-score-col" data-col-model="tfidf_xgboost"><span class="score-pill score-pill-active">64.0%</span></td>
+              <td>0.4578</td>
+              <td>0.6271</td>
+              <td>58.63%</td>
+              <td>49.75%</td>
+              <td>77.75%</td>
+              <td>1083.1s</td>
+              <td>0.610s</td>
+            </tr>
+            <tr data-model-id="sbert_xgboost">
+              <td class="model-cell">Sentence-BERT + XGBoost</td>
+              <td>55.28%</td>
+              <td class="live-score-col" data-col-model="sbert_xgboost"><span class="score-pill score-pill-active">84.2%</span></td>
+              <td>0.5307</td>
+              <td>0.6842</td>
+              <td>61.56%</td>
+              <td>55.28%</td>
+              <td>82.94%</td>
+              <td>197.4s</td>
+              <td>0.200s</td>
+            </tr>
+            <tr data-model-id="distilbert">
+              <td class="model-cell">DistilBERT Multilingual</td>
+              <td>46.59%</td>
+              <td class="live-score-col" data-col-model="distilbert"><span class="score-pill score-pill-active">76.8%</span></td>
+              <td>0.4162</td>
+              <td>0.5213</td>
+              <td>47.48%</td>
+              <td>46.59%</td>
+              <td>77.14%</td>
+              <td>3573.0s</td>
+              <td>38.940s</td>
+            </tr>
+            <tr data-model-id="bert">
+              <td class="model-cell">BERT Multilingual</td>
+              <td>51.08%</td>
+              <td class="live-score-col" data-col-model="bert"><span class="score-pill score-pill-active">81.2%</span></td>
+              <td>0.4717</td>
+              <td>0.6838</td>
+              <td>53.84%</td>
+              <td>51.08%</td>
+              <td>79.90%</td>
+              <td>2439.9s</td>
+              <td>50.670s</td>
+            </tr>
+            <tr data-model-id="hybrid" class="model-row-active">
+              <td class="model-cell">Hybrid DistilBERT + SBERT <span class="active-model-indicator auto-best-indicator">🤖 Auto-Selected Best Model</span></td>
+              <td><span class="metric-badge-best">74.24%</span></td>
+              <td class="live-score-col" data-col-model="hybrid"><span class="score-pill score-pill-active">91.8%</span></td>
+              <td><span class="metric-badge-best">0.7337</span></td>
+              <td>0.8115</td>
+              <td>78.28%</td>
+              <td>74.24%</td>
+              <td><span class="metric-badge-best">93.60%</span></td>
+              <td>3573.0s</td>
+              <td>66.390s</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-legend">
+        <div>* <b>Test Set Metrics (Accuracy, F1, Top-3)</b>: Scientific benchmark measured across all 10,692 unseen test split tickets.</div>
+        <div style="color: #38bdf8; margin-top: 4px;">* <b>⚡ Live Demo Confidence</b>: Dynamically updates for every model according to the exact ticket input in the live triage bench above.</div>
+      </div>
+    </section>
+
+    <!-- Visual Analytics & Charts Section -->
+    <section id="visualizations" class="card">
+      <div class="card-header">
+        <div class="card-badge">Data Visualizations</div>
+        <h2>Performance Visualizations & Diagnostics</h2>
+        <p>Empirical Seaborn & Matplotlib analytical figures rendered at 300 DPI across all 52 queues and evaluated models.</p>
+      </div>
+
+      <div class="plots-gallery-grid">
+        <div class="plot-card">
+          <div class="plot-card-title">Performance Metrics Comparison</div>
+          <img src="plots/model_metrics_comparison.png" alt="Model Metrics Comparison" class="plot-img" onclick="window.open(this.src)">
+        </div>
+        <div class="plot-card">
+          <div class="plot-card-title">Training Time vs. Accuracy Frontier</div>
+          <img src="plots/training_vs_accuracy_tradeoff.png" alt="Training Time vs Accuracy" class="plot-img" onclick="window.open(this.src)">
+        </div>
+        <div class="plot-card">
+          <div class="plot-card-title">Test Set Inference Latency (10,692 tickets)</div>
+          <img src="plots/inference_latency_comparison.png" alt="Inference Latency" class="plot-img" onclick="window.open(this.src)">
+        </div>
+        <div class="plot-card">
+          <div class="plot-card-title">Top 15 Support Queue Distributions</div>
+          <img src="plots/queue_distribution.png" alt="Queue Distribution" class="plot-img" onclick="window.open(this.src)">
+        </div>
+      </div>
+
+      <div class="plot-card plot-card-full" style="margin-top: 24px;">
+        <div class="plot-card-title">Normalized Confusion Matrices Grid (52 Discrete Routing Queues Across All Models)</div>
+        <img src="plots/confusion_matrices_grid.png" alt="Confusion Matrices Grid" class="plot-img" onclick="window.open(this.src)">
+      </div>
+    </section>
+
+    <!-- Architecture & Methodology Walkthrough -->
+    <section id="architecture" class="card">
+      <div class="card-header">
+        <div class="card-badge">System Design</div>
+        <h2>System Architecture & Routing Pipeline</h2>
+        <p>Understanding how the hybrid neural + semantic retrieval triage engine functions.</p>
+      </div>
+
+      <div class="pipeline-grid">
+        <div class="pipeline-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Ingestion &amp; Preprocessing</div>
+          <p>Text normalization of Ticket Subject + Body, deduplication across 61,765 raw records, removing exact textual duplicates to prevent data leakage.</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Multilingual Tokenization</div>
+          <p>Truncation and WordPiece / Subword tokenization handling bilingual English and German customer support queries up to max sequence lengths.</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Transformer Classification</div>
+          <p>Fine-tuned DistilBERT / BERT deep neural network computes class logits across all 52 support queues, mapped to probability distribution <code class="math-pill">P<sub>trans</sub>(c|x)</code>.</p>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">04</div>
+          <div class="step-title">SBERT Semantic Retrieval</div>
+          <p>Paraphrase-multilingual-MiniLM-L12-v2 encodes the ticket into 384D normalized vector space, retrieving <code class="math-pill">Top-K</code> nearest historical tickets via cosine similarity.</p>
+        </div>
+        <div class="pipeline-step step-highlight">
+          <div class="step-num">05</div>
+          <div class="step-title">Hybrid Probability Fusion</div>
+          <p>The final prediction integrates classification logits with nearest-neighbor historical evidence: <code class="math-pill">P<sub>hybrid</sub> = &alpha;&middot;P<sub>trans</sub> + (1 &minus; &alpha;)&middot;P<sub>retrieval</sub></code>, boosting robustness.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>Intelligent IT Support Ticket Triage Platform — Antigravity Advanced Agentic AI</div>
+      <div class="footer-links">
+        <span>Evaluated with PyTorch, Transformers, Sentence-BERT & XGBoost</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js?v=9"></script>
+</body>
+</html>
