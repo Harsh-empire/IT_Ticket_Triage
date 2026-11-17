@@ -71,7 +71,7 @@ Full tables (precision, recall, ROC-AUC, latency, Retrieval Hit@3 = 90.6%) are i
 - **The Transformers are under-trained.** DistilBERT and BERT were fine-tuned for **1 epoch** on CPU (`max_length=256`), which is why they trail the TF-IDF baselines. Their numbers are not the ceiling for these models.
 - **Most of the hybrid's gain comes from semantic retrieval.** It adds a probability distribution from the 3 most similar historical (training) tickets to the DistilBERT output, with fixed weights (0.75 Transformer / 0.25 retrieval) and temperature 0.07. The dataset is synthetic, so retrieval may work better here than it would on real tickets.
 - **One run, one split.** There are no repeated runs or confidence intervals. Training times come from a single CPU run and are not a controlled speed comparison.
-- **Headline metric:** weighted F1 and accuracy. Macro F1 is stored in each result JSON as an extra diagnostic only (it is higher than weighted F1 for every model here, because small queues are easier than large ones).
+- **Headline metric:** weighted F1 and accuracy. Macro F1 is stored in each result JSON as an extra diagnostic only (it is higher than weighted F1 for every model here, so it should not be quoted as the main score).
 
 ## Folder layout
 
